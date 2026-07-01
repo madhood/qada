@@ -29,6 +29,9 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 
+# agent
+.claude/
+
 # testing / misc
 coverage
 todos.json
