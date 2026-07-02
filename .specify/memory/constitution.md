@@ -1,28 +1,32 @@
 <!--
 SYNC IMPACT REPORT
 ==================
-Version change: 1.1.0 → 1.2.0
-Rationale: MINOR — added a new principle (VI. Focused Scope — Installable, Nothing
-Extraneous) and promoted PWA installability from SHOULD to a MUST, with matching technical
-standard and review gate.
+Version change: 1.2.0 → 1.3.0
+Rationale: MINOR — adopted shadcn/ui (Radix UI primitives + Tailwind) as the mandated UI
+component foundation. Materially expanded guidance in Technical Constraints (Stack + new
+"UI components" standard) and the review gates; no principle added, removed, or redefined.
 
-Modified principles: none renamed
-Added principles:
-  - VI. Focused Scope — Installable, Nothing Extraneous
-Unchanged principles: I, II, III, IV, V
-Changed guidance: Technical Constraints "Offline" → "PWA & Offline" (manifest + service
-  worker + installability now MUST)
+Modified principles: none renamed, none changed
+Added principles: none
+Unchanged principles: I, II, III, IV, V, VI
+Changed guidance:
+  - Technical Constraints "Stack" now names shadcn/ui as the component foundation
+  - Technical Constraints adds a "UI components" standard (first-party copied components,
+    RTL/LTR + i18n + a11y conformance, prefer composition over new UI deps)
+  - Development Workflow review gates add a shadcn/RTL/a11y component check
 Removed sections: none
 
 Templates reviewed for consistency:
   - .specify/templates/plan-template.md ...... ✅ compatible (Constitution Check gate is
-    generic; PWA + scope gate derived from Principles III/VI at plan time)
+    generic; UI-component conformance derived from Principles V/VI at plan time)
   - .specify/templates/spec-template.md ....... ✅ compatible (no principle-specific slots)
-  - .specify/templates/tasks-template.md ...... ✅ compatible (PWA setup + scope review
-    surface as Foundational/Polish tasks)
+  - .specify/templates/tasks-template.md ...... ✅ compatible (shadcn setup + component
+    RTL/a11y checks surface as Foundational/Polish tasks)
   - .specify/templates/checklist-template.md .. ✅ no changes required
 
-Follow-up TODOs: none.
+Follow-up TODOs:
+  - CLAUDE.md styling note ("styled with Tailwind CSS v4") SHOULD mention shadcn/ui once
+    components are actually installed into src/ (pending — not yet scaffolded).
 -->
 
 # Qada Constitution
@@ -152,7 +156,21 @@ that work against the very users the project serves.
 ## Technical Constraints & Standards
 
 - **Stack**: TanStack Start (React 19, TanStack Router file-based routing) built to static
-  output, styled with Tailwind CSS v4, bundled with Vite. Deployed to Cloudflare Pages.
+  output, styled with Tailwind CSS v4, with shadcn/ui (Radix UI primitives + Tailwind) as
+  the UI component foundation, bundled with Vite. Deployed to Cloudflare Pages.
+- **UI components**: The UI MUST be built on shadcn/ui components (Radix UI primitives styled
+  with Tailwind). Components are copied into the repository as first-party source (e.g.,
+  `src/components/ui`) and owned like any other code — never consumed as an opaque runtime
+  dependency. As first-party source, they MUST pass `npm run lint` and the Prettier config
+  like the rest of the codebase.
+  - Each component MUST satisfy Principle V: no hardcoded user-facing strings (all copy flows
+    through the i18n layer) and correct behavior in both RTL and LTR (verify mirroring — a
+    default shadcn/Radix component is not assumed RTL-correct until checked).
+  - Radix primitives' built-in accessibility (keyboard operability, focus management, ARIA)
+    MUST be preserved when a component is styled or customized.
+  - Per Principle VI, prefer composing existing shadcn/Radix primitives over adding new UI
+    dependencies; a new component library or heavy UI dependency MUST be justified against
+    the mission before it is introduced.
 - **Data & auth**: Google Identity Services for sign-in; Google Drive REST API scoped to
   `drive.appdata`; local persistence (e.g., IndexedDB/local storage) as the offline source
   of truth with Drive as the durable backup.
@@ -183,8 +201,9 @@ that work against the very users the project serves.
 - **Review gates**: Every change MUST be reviewable against the principles; reviewers
   verify no serverless dependency was introduced, OAuth scope was not widened, no worship
   data leaves the browser, no strings are hardcoded, PWA installability/offline still hold,
-  the change stays within the qada mission scope, and responsive/RTL+LTR/accessibility
-  were considered.
+  the change stays within the qada mission scope, UI is built on shadcn/ui with any new or
+  customized component verified for RTL+LTR and preserved Radix accessibility, and
+  responsive/accessibility were considered.
 - **Complexity**: Deviations from these principles MUST be recorded in the plan's
   Complexity Tracking with justification and the rejected simpler alternative.
 
@@ -207,4 +226,4 @@ reviews, and implementations MUST verify compliance with the principles above.
 - **Runtime guidance**: `CLAUDE.md` provides day-to-day development guidance and MUST stay
   consistent with this constitution; where they conflict, this constitution prevails.
 
-**Version**: 1.2.0 | **Ratified**: 2026-07-02 | **Last Amended**: 2026-07-02
+**Version**: 1.3.0 | **Ratified**: 2026-07-02 | **Last Amended**: 2026-07-02

@@ -1,11 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/')({ component: Home })
+import { HomeScreen } from '#/features/counters/HomeScreen'
 
-function Home() {
-  return (
-    <div className="flex min-h-screen items-center justify-center">
-      <h1 className="text-4xl font-bold">Hello, Qada!</h1>
-    </div>
-  )
-}
+export const Route = createFileRoute('/')({ component: HomeScreen })
