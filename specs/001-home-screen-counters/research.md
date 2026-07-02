@@ -21,6 +21,7 @@ swap for persistence later and avoids re-render of the whole tree).
 ## 2. Years / months / days formatting
 
 **Decision**: Pure function `formatYmdParts(days: number): YmdPart[]`.
+
 - `years = Math.floor(days / 360)`, `remainder = days % 360`
 - `months = Math.floor(remainder / 30)`, `d = remainder % 30`
 - Return an array containing only the non-zero units, ordered years → months → days, each as
@@ -32,14 +33,15 @@ largest to smallest). Returning structured parts keeps the function pure and uni
 without any i18n dependency; the component turns parts into localized, pluralized text.
 
 **Worked checks** (become unit tests):
-| days | parts | rendered (en) |
-|------|-------|---------------|
-| 0 | `[]` | "0 days" |
-| 10 | `[{day,10}]` | "10 days" |
-| 40 | `[{month,1},{day,10}]` | "1 month, 10 days" |
-| 39 | `[{month,1},{day,9}]` | "1 month, 9 days" |
-| 730 | `[{year,2},{day,10}]` | "2 years, 10 days" |
-| 360 | `[{year,1}]` | "1 year" |
+
+| days | parts                  | rendered (en)      |
+| ---- | ---------------------- | ------------------ |
+| 0    | `[]`                   | "0 days"           |
+| 10   | `[{day,10}]`           | "10 days"          |
+| 40   | `[{month,1},{day,10}]` | "1 month, 10 days" |
+| 39   | `[{month,1},{day,9}]`  | "1 month, 9 days"  |
+| 730  | `[{year,2},{day,10}]`  | "2 years, 10 days" |
+| 360  | `[{year,1}]`           | "1 year"           |
 
 **Alternatives considered**: `Intl.RelativeTimeFormat`/`Intl.DurationFormat` (not universally
 available, and does not honor the fixed 30/360 convention); returning a pre-joined string (mixes
@@ -50,6 +52,7 @@ formatting with i18n and is harder to test).
 **Decision**: A tiny i18n module now, expanded by Spec 006 later. `src/i18n/en.ts` is a flat
 dictionary of message keys → English strings (with simple `{var}` placeholders and explicit
 plural keys, e.g. `unit.year.one` / `unit.year.other`). `src/i18n/index.ts` exports:
+
 - `t(key: string, vars?: Record<string, string | number>): string`
 - `plural(unit: 'year'|'month'|'day', n: number): string` (chooses `.one`/`.other`, fills `{n}`)
 - `useDirection(): 'rtl' | 'ltr'` (returns `'ltr'` for now; Spec 006 makes it locale-driven)

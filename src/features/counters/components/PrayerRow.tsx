@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { cn } from '#/lib/cn'
 import { surplus } from '#/features/counters/calc'
 import { CounterButton } from '#/features/counters/components/CounterButton'
 import { ConfirmDialog } from '#/features/counters/components/ConfirmDialog'
@@ -19,11 +20,27 @@ export function PrayerRow({ prayer }: PrayerRowProps) {
   const label = t(`prayer.${prayer}`)
   const count = surplus(state, prayer)
 
+  const isHighlighted = count > 0
+
   return (
-    <div className="flex items-center justify-between gap-3">
-      <span className="min-w-0 flex-1 text-start">{label}</span>
-      <span className="tabular-nums">{count}</span>
-      <div className="flex items-center gap-2">
+    <div
+      className={cn(
+        'flex items-center justify-between gap-3 rounded-lg px-3 py-2 transition-colors',
+        isHighlighted && 'bg-accent',
+      )}
+    >
+      <span className="min-w-0 flex-1 text-start font-medium">{label}</span>
+      <span
+        className={cn(
+          'min-w-[2ch] text-center tabular-nums',
+          isHighlighted
+            ? 'font-semibold text-primary'
+            : 'text-muted-foreground',
+        )}
+      >
+        {count}
+      </span>
+      <div className="flex items-center gap-1">
         <CounterButton
           kind="decrement"
           label={label}

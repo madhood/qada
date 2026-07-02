@@ -10,10 +10,10 @@ export function SalahSection() {
 
   return (
     <section className="flex min-h-0 flex-1 flex-col gap-2">
-      <h2 className="text-base font-semibold sm:text-lg">
+      <h2 className="text-base font-semibold tracking-wide text-muted-foreground uppercase sm:text-sm">
         {t('salah.heading')}
       </h2>
-      <ProgressHeader days={salahMin(state)} />
+      <ProgressHeader days={salahMin(state)} className="text-primary" />
       <div className="flex min-h-0 flex-1 flex-col justify-around gap-1">
         {PRAYER_ORDER.map((prayer) => (
           <PrayerRow key={prayer} prayer={prayer} />

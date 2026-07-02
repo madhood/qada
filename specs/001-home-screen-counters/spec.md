@@ -19,7 +19,7 @@
 - Q: What happens when `−` would reduce a prayer at the current minimum (lowering the header)?
   → A: Allow it with the standard (kind) confirmation — treated as mistake-correction.
 
-## User Scenarios & Testing *(mandatory)*
+## User Scenarios & Testing _(mandatory)_
 
 ### User Story 1 - Record a completed make-up prayer (Priority: P1)
 
@@ -122,7 +122,7 @@ verify the count decreases by one and the header/surplus update accordingly.
 - **Unequal surpluses**: Prayer counts are independent, so surpluses commonly differ across
   the five prayers; the display must handle any combination.
 
-## Requirements *(mandatory)*
+## Requirements _(mandatory)_
 
 ### Functional Requirements
 
@@ -170,7 +170,7 @@ verify the count decreases by one and the header/surplus update accordingly.
 - **FR-017**: Every interactive control (`+`, `−`, confirmation actions) MUST be operable by
   touch and keyboard and MUST carry an accessible label.
 
-### Key Entities *(include if feature involves data)*
+### Key Entities _(include if feature involves data)_
 
 - **Prayer Counter**: Represents one of the five daily prayers (fajr, dhuhr, asr, maghrib,
   isha). Key attribute: completed count (non-negative whole number of made-up prayers of that
@@ -182,7 +182,7 @@ verify the count decreases by one and the header/surplus update accordingly.
   whole number of days). Presented to the user only as years / months / days, never as a raw
   number.
 
-## Success Criteria *(mandatory)*
+## Success Criteria _(mandatory)_
 
 ### Measurable Outcomes
 

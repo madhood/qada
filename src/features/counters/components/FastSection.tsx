@@ -15,10 +15,12 @@ export function FastSection() {
 
   return (
     <section className="flex min-h-0 flex-col gap-2">
-      <h2 className="text-base font-semibold sm:text-lg">{label}</h2>
-      <div className="flex items-center justify-between gap-3">
-        <ProgressHeader days={state.fasts} />
-        <div className="flex items-center gap-2">
+      <h2 className="text-base font-semibold tracking-wide text-muted-foreground uppercase sm:text-sm">
+        {label}
+      </h2>
+      <div className="flex items-center justify-between gap-3 rounded-lg border border-border bg-card px-3 py-2">
+        <ProgressHeader days={state.fasts} className="text-primary" />
+        <div className="flex items-center gap-1">
           <CounterButton
             kind="decrement"
             label={label}

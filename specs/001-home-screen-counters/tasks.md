@@ -1,6 +1,5 @@
 ---
-
-description: "Task list for feature implementation"
+description: 'Task list for feature implementation'
 ---
 
 # Tasks: Home Screen Counters
@@ -30,8 +29,8 @@ description: "Task list for feature implementation"
 
 **Purpose**: Project initialization and test tooling
 
-- [X] T001 Create the feature source folders: `src/features/counters/`, `src/features/counters/components/`, and `src/i18n/` (empty directories, filled by later tasks)
-- [X] T002 Add a `test` block to `vite.config.ts` with `environment: 'jsdom'` and `globals: true` so `npm run test` runs the calc unit tests (snippet in research.md §7)
+- [x] T001 Create the feature source folders: `src/features/counters/`, `src/features/counters/components/`, and `src/i18n/` (empty directories, filled by later tasks)
+- [x] T002 Add a `test` block to `vite.config.ts` with `environment: 'jsdom'` and `globals: true` so `npm run test` runs the calc unit tests (snippet in research.md §7)
 
 ---
 
@@ -41,15 +40,15 @@ description: "Task list for feature implementation"
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [X] T003 [P] Create type definitions in `src/features/counters/types.ts`: `PrayerKey`, `PRAYER_ORDER`, `ProgressState`, `YmdPart` (exact shapes in data-model.md)
-- [X] T004 [P] Create the English message dictionary in `src/i18n/en.ts` with every key listed in contracts §4 (`app.title`, `salah.heading`, `fast.heading`, `prayer.*`, `ymd.zero`, `unit.{year,month,day}.{one,other}`, `action.increment`, `action.decrement`, `confirm.*`, `praise.1`…`praise.5`)
-- [X] T005 Create the i18n seam in `src/i18n/index.ts`: `t(key, vars?)` (replaces `{var}` placeholders), `plural(unit, n)` (picks `.one`/`.other`, fills `{n}`), `useDirection()` (returns `'ltr'`), and `LOCALE = 'en'` (depends on T004)
-- [X] T006 [P] Implement pure functions in `src/features/counters/calc.ts`: `salahMin`, `surplus`, `clampNonNegative`, `formatYmdParts` (30-day month / 360-day year; `[]` for 0; throws on negative) per contracts §1
-- [X] T007 Write the constitution-required unit tests in `src/features/counters/calc.test.ts` covering every case in contracts §1 (`formatYmdParts` 0/10/40/39/360/730; `salahMin`; `surplus` for 40/41/40/42/40 and 39/41/40/42/40; `clampNonNegative`). The test file can be authored in parallel with T006, but its run step (`npx vitest run src/features/counters/calc.test.ts` — must be green) requires T006 to be implemented first
-- [X] T008 Implement the in-memory reactive store in `src/features/counters/store.ts`: `getState`, `subscribe`, `incrementPrayer`, `decrementPrayer` (clamped), `incrementFast`, `decrementFast` (clamped), and `useCounters()` on `useSyncExternalStore`; seed with `INITIAL_STATE` (`40/41/40/42/40`, fasts `30`); immutable updates that notify listeners (depends on T003, T006)
-- [X] T009 [P] Implement the reusable `src/features/counters/components/CounterButton.tsx` (`kind`, `label`, `onPress`, `disabled?`): renders a `<button>` with `aria-label = t('action.increment'|'action.decrement', { label })`, aria-hidden lucide `Plus`/`Minus` icon, ~44×44px touch target (depends on T005)
-- [X] T010 Create the `src/features/counters/HomeScreen.tsx` shell: `<main dir={useDirection()}>` with `h-dvh flex flex-col overflow-hidden` and a single shared `aria-live="polite"` encouragement region (placeholder for sections; filled by story phases) (depends on T005)
-- [X] T011 Wire the route in `src/routes/index.tsx` to render `HomeScreen` via `createFileRoute('/')({ component: HomeScreen })`, add `dir="ltr"` in `src/routes/__root.tsx`, then run `npm run generate-routes` (depends on T010)
+- [x] T003 [P] Create type definitions in `src/features/counters/types.ts`: `PrayerKey`, `PRAYER_ORDER`, `ProgressState`, `YmdPart` (exact shapes in data-model.md)
+- [x] T004 [P] Create the English message dictionary in `src/i18n/en.ts` with every key listed in contracts §4 (`app.title`, `salah.heading`, `fast.heading`, `prayer.*`, `ymd.zero`, `unit.{year,month,day}.{one,other}`, `action.increment`, `action.decrement`, `confirm.*`, `praise.1`…`praise.5`)
+- [x] T005 Create the i18n seam in `src/i18n/index.ts`: `t(key, vars?)` (replaces `{var}` placeholders), `plural(unit, n)` (picks `.one`/`.other`, fills `{n}`), `useDirection()` (returns `'ltr'`), and `LOCALE = 'en'` (depends on T004)
+- [x] T006 [P] Implement pure functions in `src/features/counters/calc.ts`: `salahMin`, `surplus`, `clampNonNegative`, `formatYmdParts` (30-day month / 360-day year; `[]` for 0; throws on negative) per contracts §1
+- [x] T007 Write the constitution-required unit tests in `src/features/counters/calc.test.ts` covering every case in contracts §1 (`formatYmdParts` 0/10/40/39/360/730; `salahMin`; `surplus` for 40/41/40/42/40 and 39/41/40/42/40; `clampNonNegative`). The test file can be authored in parallel with T006, but its run step (`npx vitest run src/features/counters/calc.test.ts` — must be green) requires T006 to be implemented first
+- [x] T008 Implement the in-memory reactive store in `src/features/counters/store.ts`: `getState`, `subscribe`, `incrementPrayer`, `decrementPrayer` (clamped), `incrementFast`, `decrementFast` (clamped), and `useCounters()` on `useSyncExternalStore`; seed with `INITIAL_STATE` (`40/41/40/42/40`, fasts `30`); immutable updates that notify listeners (depends on T003, T006)
+- [x] T009 [P] Implement the reusable `src/features/counters/components/CounterButton.tsx` (`kind`, `label`, `onPress`, `disabled?`): renders a `<button>` with `aria-label = t('action.increment'|'action.decrement', { label })`, aria-hidden lucide `Plus`/`Minus` icon, ~44×44px touch target (depends on T005)
+- [x] T010 Create the `src/features/counters/HomeScreen.tsx` shell: `<main dir={useDirection()}>` with `h-dvh flex flex-col overflow-hidden` and a single shared `aria-live="polite"` encouragement region (placeholder for sections; filled by story phases) (depends on T005)
+- [x] T011 Wire the route in `src/routes/index.tsx` to render `HomeScreen` via `createFileRoute('/')({ component: HomeScreen })`, add `dir="ltr"` in `src/routes/__root.tsx`, then run `npm run generate-routes` (depends on T010)
 
 **Checkpoint**: Foundation ready — logic tested, store live, route renders the shell. User stories can now begin.
 
@@ -63,10 +62,10 @@ description: "Task list for feature implementation"
 
 ### Implementation for User Story 1
 
-- [X] T012 [P] [US1] Create the encouragement rotation module `src/features/counters/messages.ts`: `ENCOURAGEMENT_KEYS` (≥5, referencing `praise.*`) and `nextEncouragementKey()` (module-level index that wraps; never returns the same key twice in a row) per contracts §3
-- [X] T013 [US1] Create `src/features/counters/components/PrayerRow.tsx` (`prayer` prop): reads `useCounters()`, renders `t('prayer.${prayer}')`, the read-only surplus number (`surplus(state, prayer)`), and an increment `CounterButton` whose `onPress` calls `store.incrementPrayer(prayer)` then publishes `t(nextEncouragementKey())` to the shared live region; also render a decrement `CounterButton` (wired in US3) (depends on T008, T009, T012)
-- [X] T014 [US1] Create `src/features/counters/components/SalahSection.tsx` rendering `t('salah.heading')` and one `PrayerRow` per key in `PRAYER_ORDER` (depends on T013)
-- [X] T015 [US1] In `src/features/counters/HomeScreen.tsx`, render `SalahSection`, provide the encouragement setter to `PrayerRow` (via context/props/tiny store — implementer's choice, exactly one live region), and auto-clear the message after ~3s without shifting layout (depends on T010, T014)
+- [x] T012 [P] [US1] Create the encouragement rotation module `src/features/counters/messages.ts`: `ENCOURAGEMENT_KEYS` (≥5, referencing `praise.*`) and `nextEncouragementKey()` (module-level index that wraps; never returns the same key twice in a row) per contracts §3
+- [x] T013 [US1] Create `src/features/counters/components/PrayerRow.tsx` (`prayer` prop): reads `useCounters()`, renders `t('prayer.${prayer}')`, the read-only surplus number (`surplus(state, prayer)`), and an increment `CounterButton` whose `onPress` calls `store.incrementPrayer(prayer)` then publishes `t(nextEncouragementKey())` to the shared live region; also render a decrement `CounterButton` (wired in US3) (depends on T008, T009, T012)
+- [x] T014 [US1] Create `src/features/counters/components/SalahSection.tsx` rendering `t('salah.heading')` and one `PrayerRow` per key in `PRAYER_ORDER` (depends on T013)
+- [x] T015 [US1] In `src/features/counters/HomeScreen.tsx`, render `SalahSection`, provide the encouragement setter to `PrayerRow` (via context/props/tiny store — implementer's choice, exactly one live region), and auto-clear the message after ~3s without shifting layout (depends on T010, T014)
 
 **Checkpoint**: `+` on any prayer increments its surplus and shows a rotating message — MVP recording works.
 
@@ -80,10 +79,10 @@ description: "Task list for feature implementation"
 
 ### Implementation for User Story 2
 
-- [X] T016 [P] [US2] Create `src/features/counters/components/ProgressHeader.tsx` (`days` prop): computes `formatYmdParts(days)` and renders localized text — empty → `t('ymd.zero')`; otherwise map each part to `plural(part.unit, part.value)` joined by `", "` (contracts §4 header rule) (depends on T006, T005)
-- [X] T017 [US2] Add `<ProgressHeader days={salahMin(state)} />` under the heading in `src/features/counters/components/SalahSection.tsx` (depends on T014, T016)
-- [X] T018 [P] [US2] Create `src/features/counters/components/FastSection.tsx`: renders `t('fast.heading')`, `<ProgressHeader days={state.fasts} />` (NO raw number), and increment `CounterButton` calling `store.incrementFast()` with encouragement (decrement `CounterButton` rendered, wired in US3; disabled at 0) (depends on T008, T009, T016, T012)
-- [X] T019 [US2] In `src/features/counters/HomeScreen.tsx`, add `FastSection` and finalize the no-scroll layout (`h-dvh`, `flex flex-col`, `overflow-hidden`, `min-h-0`, fluid spacing) so both sections stay fully visible with no vertical/horizontal scroll from 320px upward (depends on T015, T018)
+- [x] T016 [P] [US2] Create `src/features/counters/components/ProgressHeader.tsx` (`days` prop): computes `formatYmdParts(days)` and renders localized text — empty → `t('ymd.zero')`; otherwise map each part to `plural(part.unit, part.value)` joined by `", "` (contracts §4 header rule) (depends on T006, T005)
+- [x] T017 [US2] Add `<ProgressHeader days={salahMin(state)} />` under the heading in `src/features/counters/components/SalahSection.tsx` (depends on T014, T016)
+- [x] T018 [P] [US2] Create `src/features/counters/components/FastSection.tsx`: renders `t('fast.heading')`, `<ProgressHeader days={state.fasts} />` (NO raw number), and increment `CounterButton` calling `store.incrementFast()` with encouragement (decrement `CounterButton` rendered, wired in US3; disabled at 0) (depends on T008, T009, T016, T012)
+- [x] T019 [US2] In `src/features/counters/HomeScreen.tsx`, add `FastSection` and finalize the no-scroll layout (`h-dvh`, `flex flex-col`, `overflow-hidden`, `min-h-0`, fluid spacing) so both sections stay fully visible with no vertical/horizontal scroll from 320px upward (depends on T015, T018)
 
 **Checkpoint**: Both P1 stories complete — recording and at-a-glance progress work together in one viewport (SC-003, SC-004).
 
@@ -97,9 +96,9 @@ description: "Task list for feature implementation"
 
 ### Implementation for User Story 3
 
-- [X] T020 [P] [US3] Create `src/features/counters/components/ConfirmDialog.tsx` (`open`, `label`, `onConfirm`, `onCancel`): wraps native `<dialog>`, `showModal()` when open, localized Confirm/Cancel buttons (`confirm.*`), Esc/backdrop → `onCancel`, initial focus on Cancel (contracts §5) (depends on T005)
-- [X] T021 [US3] Wire decrement in `src/features/counters/components/PrayerRow.tsx`: decrement `CounterButton` opens `ConfirmDialog`; on confirm call `store.decrementPrayer(prayer)`; disable the button when `state.prayers[prayer] === 0` (depends on T013, T020)
-- [X] T022 [US3] Wire decrement in `src/features/counters/components/FastSection.tsx`: decrement `CounterButton` opens `ConfirmDialog`; on confirm call `store.decrementFast()`; disable when `state.fasts === 0` (depends on T018, T020)
+- [x] T020 [P] [US3] Create `src/features/counters/components/ConfirmDialog.tsx` (`open`, `label`, `onConfirm`, `onCancel`): wraps native `<dialog>`, `showModal()` when open, localized Confirm/Cancel buttons (`confirm.*`), Esc/backdrop → `onCancel`, initial focus on Cancel (contracts §5) (depends on T005)
+- [x] T021 [US3] Wire decrement in `src/features/counters/components/PrayerRow.tsx`: decrement `CounterButton` opens `ConfirmDialog`; on confirm call `store.decrementPrayer(prayer)`; disable the button when `state.prayers[prayer] === 0` (depends on T013, T020)
+- [x] T022 [US3] Wire decrement in `src/features/counters/components/FastSection.tsx`: decrement `CounterButton` opens `ConfirmDialog`; on confirm call `store.decrementFast()`; disable when `state.fasts === 0` (depends on T018, T020)
 
 **Checkpoint**: All three stories independently functional; SC-004 reduce transition (header "1 month, 9 days", surpluses 0/2/1/3/1) verifiable.
 
@@ -109,11 +108,11 @@ description: "Task list for feature implementation"
 
 **Purpose**: Final verification against the spec and quality gates
 
-- [X] T023 [P] Verify accessibility (FR-017): keyboard-only Tab reaches and operates every `+`/`−` and both dialog buttons; all controls carry clear labels
-- [X] T024 [P] Verify direction/RTL safety (FR-016): temporarily set `dir="rtl"` on the root; confirm layout mirrors via logical properties (no `pl-*`/`pr-*`/`left`/`right`, no clipped elements) and no hardcoded user-facing strings exist outside `src/i18n/en.ts`
-- [X] T025 [P] Add a store consistency test in `src/features/counters/store.test.ts` for SC-007: apply 10 synchronous `incrementPrayer` calls (and a mixed increment/decrement sequence) and assert the resulting count equals the exact net number of applied operations — no lost, doubled, or desynced taps (depends on T008)
-- [X] T026 Run the full quickstart.md manual validation script (all 12 checks) and the build check (`npm run build && npm run preview` — static output, Constitution III)
-- [X] T027 Run and pass the quality gates: `npm run test`, `npm run check` (Prettier), and `npm run lint`
+- [x] T023 [P] Verify accessibility (FR-017): keyboard-only Tab reaches and operates every `+`/`−` and both dialog buttons; all controls carry clear labels
+- [x] T024 [P] Verify direction/RTL safety (FR-016): temporarily set `dir="rtl"` on the root; confirm layout mirrors via logical properties (no `pl-*`/`pr-*`/`left`/`right`, no clipped elements) and no hardcoded user-facing strings exist outside `src/i18n/en.ts`
+- [x] T025 [P] Add a store consistency test in `src/features/counters/store.test.ts` for SC-007: apply 10 synchronous `incrementPrayer` calls (and a mixed increment/decrement sequence) and assert the resulting count equals the exact net number of applied operations — no lost, doubled, or desynced taps (depends on T008)
+- [x] T026 Run the full quickstart.md manual validation script (all 12 checks) and the build check (`npm run build && npm run preview` — static output, Constitution III)
+- [x] T027 Run and pass the quality gates: `npm run test`, `npm run check` (Prettier), and `npm run lint`
 
 ---
 

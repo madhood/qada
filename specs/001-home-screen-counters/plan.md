@@ -42,6 +42,7 @@ server runtime, no serverless functions.
 within a few seconds on a mid-range phone over 3G.
 
 **Constraints**:
+
 - The salah section + fasting section MUST fit in one viewport with no scrolling from 320px
   wide upward (FR-001, SC-003). Use `100dvh` and a flex column that never overflows.
 - No hardcoded user-facing strings; all text via the i18n `t()` helper; layout must work in
@@ -54,16 +55,16 @@ integers (safe well beyond this).
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-checked after Phase 1 design.*
+_GATE: Must pass before Phase 0 research. Re-checked after Phase 1 design._
 
-| Principle | How this plan complies |
-|-----------|------------------------|
-| I. Worshipper-Centered Intuitive UX | `+` is one tap, no confirm; counts always visible; `−` behind a kind, non-shaming confirm; rotating encouragement on `+`. |
-| II. User-Owned Data in Google Drive | No backend. Data stays on-device (in-memory now; IndexedDB in Spec 003; Drive in Spec 005). Store API is the seam; nothing leaves the browser. |
-| III. Static-Only, Serverless-Free | Home route is a client component; no server functions/loaders that need a runtime. Builds to static assets. |
-| IV. Security & Privacy by Default | No network calls, no third parties, no tokens, no telemetry in this feature. |
-| V. Universal Language, Direction & Accessibility | Minimal i18n seam (`t()` + `dir`); CSS logical properties only; responsive from 320px; keyboard + touch + aria labels; native `<dialog>` for accessible confirm. |
-| VI. Focused Scope — Installable, Nothing Extraneous | Only the counter home screen — no extra features. PWA install is Spec 007; this plan does nothing that blocks it. |
+| Principle                                           | How this plan complies                                                                                                                                           |
+| --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| I. Worshipper-Centered Intuitive UX                 | `+` is one tap, no confirm; counts always visible; `−` behind a kind, non-shaming confirm; rotating encouragement on `+`.                                        |
+| II. User-Owned Data in Google Drive                 | No backend. Data stays on-device (in-memory now; IndexedDB in Spec 003; Drive in Spec 005). Store API is the seam; nothing leaves the browser.                   |
+| III. Static-Only, Serverless-Free                   | Home route is a client component; no server functions/loaders that need a runtime. Builds to static assets.                                                      |
+| IV. Security & Privacy by Default                   | No network calls, no third parties, no tokens, no telemetry in this feature.                                                                                     |
+| V. Universal Language, Direction & Accessibility    | Minimal i18n seam (`t()` + `dir`); CSS logical properties only; responsive from 320px; keyboard + touch + aria labels; native `<dialog>` for accessible confirm. |
+| VI. Focused Scope — Installable, Nothing Extraneous | Only the counter home screen — no extra features. PWA install is Spec 007; this plan does nothing that blocks it.                                                |
 
 **Initial gate result**: PASS (no violations). **Complexity Tracking**: none required.
 
@@ -130,6 +131,7 @@ already fixed month=30/year=360, non-zero-units formatting, and reduce-below-min
 ## Phase 1 — Design & Contracts
 
 Artifacts produced:
+
 - [data-model.md](data-model.md) — `ProgressState`, `PrayerKey`, `YmdPart`, derivation rules,
   validation (non-negative integers), and the worked example numbers.
 - [contracts/module-contracts.md](contracts/module-contracts.md) — exact signatures for every

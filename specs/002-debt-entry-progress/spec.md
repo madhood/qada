@@ -8,7 +8,7 @@
 
 **Input**: User description: "Spec 002 — Debt Entry & Progress"
 
-## User Scenarios & Testing *(mandatory)*
+## User Scenarios & Testing _(mandatory)_
 
 ### User Story 1 - Record how many prayers/fasts I owe (Priority: P1)
 
@@ -115,7 +115,7 @@ confirm completed counts are untouched while remaining/progress recalculates.
 - **Debt reduced while progress view open**: After saving a new debt, any open progress view
   reflects the updated remaining/progress immediately.
 
-## Requirements *(mandatory)*
+## Requirements _(mandatory)_
 
 ### Functional Requirements
 
@@ -160,7 +160,7 @@ confirm completed counts are untouched while remaining/progress recalculates.
 - **FR-019**: All inputs and controls MUST be operable by touch and keyboard and MUST carry
   accessible labels; the date-range estimator MUST be usable without relying on color alone.
 
-### Key Entities *(include if feature involves data)*
+### Key Entities _(include if feature involves data)_
 
 - **Prayer Debt**: The total missed obligatory prayers the person owes, stored as a
   non-negative whole number of days, independent from completed counts. Editable over time.
@@ -172,7 +172,7 @@ confirm completed counts are untouched while remaining/progress recalculates.
   remaining = max(debt − completed, 0), and overall completion percentage = min(completed ÷
   debt, 100%) when debt > 0.
 
-## Success Criteria *(mandatory)*
+## Success Criteria _(mandatory)_
 
 ### Measurable Outcomes
 

@@ -9,7 +9,11 @@ This feature has a tiny, in-memory data model. All numbers are **non-negative in
 export type PrayerKey = 'fajr' | 'dhuhr' | 'asr' | 'maghrib' | 'isha'
 
 export const PRAYER_ORDER: readonly PrayerKey[] = [
-  'fajr', 'dhuhr', 'asr', 'maghrib', 'isha',
+  'fajr',
+  'dhuhr',
+  'asr',
+  'maghrib',
+  'isha',
 ] as const
 
 // The complete on-screen state. Owned by the store; later specs persist it.
@@ -45,21 +49,21 @@ Spec 003 will replace this seed with data loaded from storage; the shape stays i
 
 Let `p = state.prayers`.
 
-| Derived value | Definition | Example (40/41/40/42/40) |
-|---------------|-----------|--------------------------|
-| `salahMin` | `Math.min(p.fajr, p.dhuhr, p.asr, p.maghrib, p.isha)` | `40` |
-| `surplus(key)` | `p[key] - salahMin` (always ≥ 0) | fajr 0, dhuhr 1, asr 0, maghrib 2, isha 0 |
-| salah header parts | `formatYmdParts(salahMin)` | `[{month,1},{day,10}]` → "1 month, 10 days" |
-| fast header parts | `formatYmdParts(state.fasts)` | for 30 → `[{month,1}]` → "1 month" |
+| Derived value      | Definition                                            | Example (40/41/40/42/40)                    |
+| ------------------ | ----------------------------------------------------- | ------------------------------------------- |
+| `salahMin`         | `Math.min(p.fajr, p.dhuhr, p.asr, p.maghrib, p.isha)` | `40`                                        |
+| `surplus(key)`     | `p[key] - salahMin` (always ≥ 0)                      | fajr 0, dhuhr 1, asr 0, maghrib 2, isha 0   |
+| salah header parts | `formatYmdParts(salahMin)`                            | `[{month,1},{day,10}]` → "1 month, 10 days" |
+| fast header parts  | `formatYmdParts(state.fasts)`                         | for 30 → `[{month,1}]` → "1 month"          |
 
 ## Mutations (via the store — see contracts/module-contracts.md)
 
-| Action | Effect | Rules |
-|--------|--------|-------|
-| `incrementPrayer(key)` | `p[key] += 1` | No confirm. Triggers encouragement rotation. (FR-006, FR-007) |
-| `decrementPrayer(key)` | `p[key] = max(0, p[key] - 1)` | Only after confirmation. Never below 0. (FR-008–FR-010) |
-| `incrementFast()` | `fasts += 1` | Same as prayer `+`. (FR-013) |
-| `decrementFast()` | `fasts = max(0, fasts - 1)` | Only after confirmation. Never below 0. (FR-013) |
+| Action                 | Effect                        | Rules                                                         |
+| ---------------------- | ----------------------------- | ------------------------------------------------------------- |
+| `incrementPrayer(key)` | `p[key] += 1`                 | No confirm. Triggers encouragement rotation. (FR-006, FR-007) |
+| `decrementPrayer(key)` | `p[key] = max(0, p[key] - 1)` | Only after confirmation. Never below 0. (FR-008–FR-010)       |
+| `incrementFast()`      | `fasts += 1`                  | Same as prayer `+`. (FR-013)                                  |
+| `decrementFast()`      | `fasts = max(0, fasts - 1)`   | Only after confirmation. Never below 0. (FR-013)              |
 
 After any mutation the store notifies subscribers; components re-read derived values, so header
 and surpluses update immediately (FR-014).
@@ -76,5 +80,6 @@ and surpluses update immediately (FR-014).
 
 Start `40 / 41 / 40 / 42 / 40` → header "1 month, 10 days", surpluses `0/1/0/2/0`.
 Confirm `decrementPrayer('fajr')` → `39 / 41 / 40 / 42 / 40`:
+
 - new `salahMin = 39` → header parts `[{month,1},{day,9}]` → "1 month, 9 days"
 - surpluses: fajr `0`, dhuhr `2`, asr `1`, maghrib `3`, isha `1` → `0/2/1/3/1`

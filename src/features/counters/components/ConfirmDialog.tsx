@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 
+import { Button } from '#/components/ui/button'
 import { t } from '#/i18n'
 
 interface ConfirmDialogProps {
@@ -39,26 +40,19 @@ export function ConfirmDialog({
       onClick={(event) => {
         if (event.target === dialogRef.current) onCancel()
       }}
-      className="rounded-lg p-6 backdrop:bg-black/40"
+      className="rounded-lg border border-border bg-card p-6 text-card-foreground shadow-lg"
     >
-      <p className="mb-4 font-semibold">{t('confirm.title')}</p>
-      <p className="mb-6">{t('confirm.body', { label })}</p>
+      <p className="mb-2 font-semibold">{t('confirm.title')}</p>
+      <p className="mb-6 text-muted-foreground">
+        {t('confirm.body', { label })}
+      </p>
       <div className="flex justify-end gap-3">
-        <button
-          ref={cancelRef}
-          type="button"
-          onClick={onCancel}
-          className="rounded px-4 py-2"
-        >
+        <Button ref={cancelRef} variant="outline" onClick={onCancel}>
           {t('confirm.cancel')}
-        </button>
-        <button
-          type="button"
-          onClick={onConfirm}
-          className="rounded bg-current px-4 py-2 text-white"
-        >
+        </Button>
+        <Button variant="default" onClick={onConfirm}>
           {t('confirm.yes')}
-        </button>
+        </Button>
       </div>
     </dialog>
   )

@@ -10,11 +10,14 @@ export function HomeScreen() {
   return (
     <main
       dir={dir}
-      className="flex h-dvh flex-col gap-4 overflow-hidden p-4 sm:gap-6 sm:p-6"
+      className="flex h-dvh flex-col gap-4 overflow-hidden bg-background p-4 sm:gap-6 sm:p-6"
     >
       <SalahSection />
       <FastSection />
-      <p aria-live="polite" className="h-6 shrink-0 text-center text-sm">
+      <p
+        aria-live="polite"
+        className="h-6 shrink-0 text-center text-sm text-muted-foreground"
+      >
         {message}
       </p>
     </main>

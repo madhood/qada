@@ -40,20 +40,20 @@ npm run generate-routes
 Open http://localhost:3000 and confirm each item. Seed data is `40 / 41 / 40 / 42 / 40` and
 fasts `30`.
 
-| # | Spec ref | Action | Expected result |
-|---|----------|--------|-----------------|
-| 1 | US2 AS1 / SC-004 | Load the screen | Salah header reads **"1 month, 10 days"**; surpluses read **0 / 1 / 0 / 2 / 0**. |
-| 2 | US2 AS2 / SC-003 | View on a 320px-wide viewport (devtools) | Salah + fast sections both fully visible; **no scrolling** (vertical or horizontal). |
-| 3 | US2 AS3 | Look at the fast section | Shows progress in y/m/d ("1 month"); **no raw number**. |
-| 4 | US1 AS1 / SC-002 | Tap `+` on Fajr once | Fajr surplus becomes **1**; an encouraging message appears; **no confirm prompt**. |
-| 5 | US1 AS3 / FR-007 | Tap `+` several times | The encouragement message **varies** (no immediate repeat). |
-| 6 | US3 AS1 | Tap `−` on any prayer | A **kind confirmation** dialog appears before any change. |
-| 7 | US3 AS4 / SC-004 | From seed, confirm `−` on Fajr | Header becomes **"1 month, 9 days"**; surpluses become **0 / 2 / 1 / 3 / 1**. |
-| 8 | US3 AS3 | Open `−` dialog, press Cancel / Esc | Nothing changes; dialog closes. |
-| 9 | FR-010 | Decrement a counter down to 0, try again | Value stays **0**; decrement is disabled / does nothing. No negatives. |
-| 10 | FR-017 | Tab through the screen; operate `+`/`−`/dialog with keyboard only | All controls reachable and operable; buttons have clear labels (check with a screen reader or the accessibility inspector). |
-| 11 | FR-016 | Inspect DOM / temporarily set `dir="rtl"` on the root | Layout mirrors correctly (start/end, not left/right); no clipped or hardcoded-side elements. |
-| 12 | FR-015 | Anywhere on the home screen | **No** debt / remaining / missed-days info is shown. |
+| #   | Spec ref         | Action                                                            | Expected result                                                                                                             |
+| --- | ---------------- | ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| 1   | US2 AS1 / SC-004 | Load the screen                                                   | Salah header reads **"1 month, 10 days"**; surpluses read **0 / 1 / 0 / 2 / 0**.                                            |
+| 2   | US2 AS2 / SC-003 | View on a 320px-wide viewport (devtools)                          | Salah + fast sections both fully visible; **no scrolling** (vertical or horizontal).                                        |
+| 3   | US2 AS3          | Look at the fast section                                          | Shows progress in y/m/d ("1 month"); **no raw number**.                                                                     |
+| 4   | US1 AS1 / SC-002 | Tap `+` on Fajr once                                              | Fajr surplus becomes **1**; an encouraging message appears; **no confirm prompt**.                                          |
+| 5   | US1 AS3 / FR-007 | Tap `+` several times                                             | The encouragement message **varies** (no immediate repeat).                                                                 |
+| 6   | US3 AS1          | Tap `−` on any prayer                                             | A **kind confirmation** dialog appears before any change.                                                                   |
+| 7   | US3 AS4 / SC-004 | From seed, confirm `−` on Fajr                                    | Header becomes **"1 month, 9 days"**; surpluses become **0 / 2 / 1 / 3 / 1**.                                               |
+| 8   | US3 AS3          | Open `−` dialog, press Cancel / Esc                               | Nothing changes; dialog closes.                                                                                             |
+| 9   | FR-010           | Decrement a counter down to 0, try again                          | Value stays **0**; decrement is disabled / does nothing. No negatives.                                                      |
+| 10  | FR-017           | Tab through the screen; operate `+`/`−`/dialog with keyboard only | All controls reachable and operable; buttons have clear labels (check with a screen reader or the accessibility inspector). |
+| 11  | FR-016           | Inspect DOM / temporarily set `dir="rtl"` on the root             | Layout mirrors correctly (start/end, not left/right); no clipped or hardcoded-side elements.                                |
+| 12  | FR-015           | Anywhere on the home screen                                       | **No** debt / remaining / missed-days info is shown.                                                                        |
 
 ## Build check (static output — Constitution III)
 

@@ -8,7 +8,7 @@
 
 **Input**: User description: "Spec 003 — Local Persistence & Count Logic"
 
-## User Scenarios & Testing *(mandatory)*
+## User Scenarios & Testing _(mandatory)_
 
 ### User Story 1 - My progress is still here when I come back (Priority: P1)
 
@@ -107,7 +107,7 @@ values) and verify each derived output matches the defined rules exactly.
 - **Clock changes**: Changing the device clock does not corrupt stored counts (counts are not
   time-derived; only optional timestamps, if any, are affected).
 
-## Requirements *(mandatory)*
+## Requirements _(mandatory)_
 
 ### Functional Requirements
 
@@ -145,7 +145,7 @@ values) and verify each derived output matches the defined rules exactly.
 - **FR-015**: Concurrent updates from more than one open instance on the same device MUST NOT
   produce an inconsistent stored total.
 
-### Key Entities *(include if feature involves data)*
+### Key Entities _(include if feature involves data)_
 
 - **Progress Record**: The complete on-device set of the person's data — the five prayer
   completed counts, the completed fast count, and prayer/fast debt — persisted as the local
@@ -156,7 +156,7 @@ values) and verify each derived output matches the defined rules exactly.
   remaining debt, completion percentage, and years/months/days formatting — recomputed from the
   Progress Record on demand.
 
-## Success Criteria *(mandatory)*
+## Success Criteria _(mandatory)_
 
 ### Measurable Outcomes
 

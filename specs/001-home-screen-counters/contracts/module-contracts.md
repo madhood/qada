@@ -9,7 +9,11 @@ here is client-side TypeScript/React. Import from `src/*` using the `#/` alias (
 ## 1. `src/features/counters/calc.ts` (pure functions — unit tested)
 
 ```ts
-import type { PrayerKey, ProgressState, YmdPart } from '#/features/counters/types'
+import type {
+  PrayerKey,
+  ProgressState,
+  YmdPart,
+} from '#/features/counters/types'
 
 /** Lowest completed count across the five prayers. */
 export function salahMin(state: ProgressState): number
@@ -29,6 +33,7 @@ export function formatYmdParts(days: number): YmdPart[]
 ```
 
 **Required test cases** (`calc.test.ts`) — must all pass:
+
 - `formatYmdParts`: 0 → `[]`; 10 → `[{day,10}]`; 40 → `[{month,1},{day,10}]`;
   39 → `[{month,1},{day,9}]`; 360 → `[{year,1}]`; 730 → `[{year,2},{day,10}]`.
 - `salahMin({40,41,40,42,40})` → 40; after fajr→39, `salahMin` → 39.
@@ -49,8 +54,8 @@ export function getState(): ProgressState
 /** Subscribe to changes; returns an unsubscribe function. */
 export function subscribe(listener: () => void): () => void
 
-export function incrementPrayer(key: PrayerKey): void   // +1, no clamp needed
-export function decrementPrayer(key: PrayerKey): void   // clampNonNegative
+export function incrementPrayer(key: PrayerKey): void // +1, no clamp needed
+export function decrementPrayer(key: PrayerKey): void // clampNonNegative
 export function incrementFast(): void
 export function decrementFast(): void
 
@@ -59,6 +64,7 @@ export function useCounters(): ProgressState
 ```
 
 Rules:
+
 - Mutations create a **new** `ProgressState` object (immutable update) then notify listeners, so
   `useSyncExternalStore` detects the change by reference.
 - `decrementPrayer`/`decrementFast` use `clampNonNegative` (never below 0).
@@ -94,6 +100,7 @@ export const LOCALE = 'en'
 ```
 
 `en.ts` must define (at minimum) these keys:
+
 - `app.title`
 - `salah.heading`, `fast.heading`
 - `prayer.fajr`, `prayer.dhuhr`, `prayer.asr`, `prayer.maghrib`, `prayer.isha`
@@ -125,16 +132,16 @@ strings in JSX. Use Tailwind **logical** utilities (`ps-*`, `pe-*`, `ms-*`, `me-
 // CounterButton.tsx
 interface CounterButtonProps {
   kind: 'increment' | 'decrement'
-  label: string          // localized name of the target, e.g. t('prayer.fajr')
+  label: string // localized name of the target, e.g. t('prayer.fajr')
   onPress: () => void
-  disabled?: boolean     // true when a decrement would target a value already at 0
+  disabled?: boolean // true when a decrement would target a value already at 0
 }
 // Renders a <button> with aria-label = t('action.increment'|'action.decrement', { label }).
 // Icon (lucide Plus/Minus) is aria-hidden. Min touch target ~44x44px.
 
 // ProgressHeader.tsx
 interface ProgressHeaderProps {
-  days: number           // salahMin, or fasts
+  days: number // salahMin, or fasts
 }
 // Computes formatYmdParts(days) and renders localized text per the header rendering rule.
 
@@ -158,7 +165,7 @@ interface PrayerRowProps {
 // ConfirmDialog.tsx
 interface ConfirmDialogProps {
   open: boolean
-  label: string          // localized target name for the body copy
+  label: string // localized target name for the body copy
   onConfirm: () => void
   onCancel: () => void
 }

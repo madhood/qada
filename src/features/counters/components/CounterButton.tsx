@@ -1,5 +1,6 @@
 import { Minus, Plus } from 'lucide-react'
 
+import { Button } from '#/components/ui/button'
 import { t } from '#/i18n'
 
 interface CounterButtonProps {
@@ -22,14 +23,14 @@ export function CounterButton({
   )
 
   return (
-    <button
-      type="button"
+    <Button
+      variant="outline"
+      size="icon"
       aria-label={ariaLabel}
       onClick={onPress}
       disabled={disabled}
-      className="flex h-11 w-11 items-center justify-center rounded-full border border-current disabled:opacity-40"
     >
       <Icon aria-hidden size={20} />
-    </button>
+    </Button>
   )
 }
