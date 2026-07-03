@@ -11,6 +11,13 @@ interface CategoryProgressProps {
   completed: number
 }
 
+/** Splits a `{days}`-bearing translation around the placeholder so the rendered
+ *  day count lands wherever the translation puts it, instead of a fixed JSX order. */
+function splitAroundDays(key: string): [string, string] {
+  const [before, after] = t(key).split('{days}')
+  return [before, after]
+}
+
 function deriveStatus(
   debt: number | null,
   completed: number,
@@ -31,6 +38,10 @@ export function CategoryProgress({
   const percent = completionPercent(debt, completed)
   const headingKey =
     category === 'prayer' ? 'progress.prayer.heading' : 'progress.fast.heading'
+  const [completedBefore, completedAfter] =
+    splitAroundDays('progress.completed')
+  const [remainingBefore, remainingAfter] =
+    splitAroundDays('progress.remaining')
 
   return (
     <div className="flex flex-col gap-3 rounded-lg border border-border bg-card p-4">
@@ -57,8 +68,9 @@ export function CategoryProgress({
           />
           <div className="flex gap-2 text-sm">
             <span>
-              {t('progress.completed', { days: '' })}{' '}
+              {completedBefore}
               <ProgressHeader days={completed} className="inline text-base" />
+              {completedAfter}
             </span>
           </div>
         </>
@@ -77,14 +89,15 @@ export function CategoryProgress({
           </p>
           <div className="flex flex-col gap-1 text-sm text-muted-foreground sm:flex-row sm:gap-4">
             <span>
-              {t('progress.completed', { days: '' })}{' '}
+              {completedBefore}
               <ProgressHeader
                 days={completed}
                 className="inline text-base font-semibold text-foreground"
               />
+              {completedAfter}
             </span>
             <span>
-              {t('progress.remaining', { days: '' })}{' '}
+              {remainingBefore}
               <ProgressHeader
                 days={rem}
                 className={cn(
@@ -94,6 +107,7 @@ export function CategoryProgress({
                     : 'font-semibold text-foreground',
                 )}
               />
+              {remainingAfter}
             </span>
           </div>
         </>
