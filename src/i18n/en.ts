@@ -31,4 +31,38 @@ export const en = {
   'praise.3': 'Every make-up counts. Keep it up!',
   'praise.4': 'Beautiful effort — may Allah accept it.',
   'praise.5': "That's one more off the list!",
+
+  // Debt & Progress (Spec 002)
+  'nav.debt': 'Debt & progress',
+  'nav.home': 'Back to counters',
+
+  'debt.heading': 'Your make-up debt',
+  'debt.prayer.label': 'Missed prayers (days)',
+  'debt.fast.label': 'Missed fasts (days)',
+  'debt.save': 'Save',
+  'debt.saved': 'Saved',
+
+  'debt.estimator.heading': 'Estimate from dates',
+  'debt.estimator.start': 'From',
+  'debt.estimator.end': 'Until',
+  'debt.estimator.compute': 'Calculate days',
+  'debt.estimator.proposal': "That's {days} days — use this?",
+  'debt.estimator.accept': 'Use it',
+
+  'debt.error.empty': 'Please enter a number.',
+  'debt.error.not-a-number': 'Please enter a whole number of days.',
+  'debt.error.negative': "Days can't be negative.",
+  'debt.error.not-integer': 'Please enter whole days only.',
+  'debt.error.end-before-start': 'The end date is before the start date.',
+  'debt.error.future-date': 'That date is in the future.',
+
+  'progress.heading': 'Your progress',
+  'progress.prayer.heading': 'Prayers',
+  'progress.fast.heading': 'Fasts',
+  'progress.completed': '{days} done',
+  'progress.remaining': '{days} to go',
+  'progress.percent': '{n}% complete',
+  'progress.empty': "Set your debt to see how far you've come.",
+  'progress.nothingOwed': 'Nothing to make up here — may Allah accept.',
+  'progress.fullyMet': "You've completed this, alhamdulillah.",
 } as const
