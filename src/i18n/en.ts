@@ -65,4 +65,9 @@ export const en = {
   'progress.empty': "Set your debt to see how far you've come.",
   'progress.nothingOwed': 'Nothing to make up here — may Allah accept.',
   'progress.fullyMet': "You've completed this, alhamdulillah.",
+
+  // Local Persistence (Spec 003)
+  'storage.unavailable.title': 'Progress may not be saved',
+  'storage.unavailable.body':
+    'This device is blocking storage, so your changes might not be kept after you close the app. Your counts still work for now.',
 } as const

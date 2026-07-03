@@ -1,14 +1,29 @@
 import { useSyncExternalStore } from 'react'
 
 import type { DebtState } from '#/features/debt/types'
-import { INITIAL_DEBT } from '#/features/debt/types'
+import {
+  loadRecord,
+  subscribeExternal,
+  updateRecord,
+} from '#/lib/storage/persistence'
+import { markUnavailable } from '#/lib/storage/status'
 
-let state: DebtState = INITIAL_DEBT
+function readState(): DebtState {
+  const r = loadRecord()
+  return { prayerDebt: r.prayerDebt, fastDebt: r.fastDebt }
+}
+
+let state: DebtState = readState()
 const listeners = new Set<() => void>()
 
 function setState(next: DebtState): void {
   state = next
   for (const listener of listeners) listener()
+  const res = updateRecord({
+    prayerDebt: state.prayerDebt,
+    fastDebt: state.fastDebt,
+  })
+  if (!res.ok) markUnavailable()
 }
 
 /** Read the current debt (do not mutate the returned object). */
@@ -40,3 +55,7 @@ export function saveDebt(next: Partial<DebtState>): void {
 export function useDebt(): DebtState {
   return useSyncExternalStore(subscribe, getState, getState)
 }
+
+subscribeExternal(() => {
+  setState(readState())
+})

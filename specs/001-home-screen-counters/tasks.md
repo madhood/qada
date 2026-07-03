@@ -186,3 +186,9 @@ Task: "Implement CounterButton in src/features/counters/components/CounterButton
 - Never hand-edit `src/routeTree.gen.ts` — regenerate with `npm run generate-routes`.
 - State is in-memory only this feature; refresh resets to seed. Persistence is Spec 003.
 - Commit after each task or logical group; stop at any checkpoint to validate a story independently.
+
+---
+
+## Phase 7: Convergence
+
+- [x] T028 Increase the `+`/`−` touch target in `src/features/counters/components/CounterButton.tsx` to ~44×44px (currently the shadcn `Button size="icon"` resolves to `h-9 w-9` = 36×36px in `src/components/ui/button.tsx`, below the plan's contract-specified "Min touch target ~44x44px" per FR-017 / Constitution V touch-first ergonomics), per contracts §5 (partial)

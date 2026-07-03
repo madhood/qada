@@ -26,6 +26,7 @@ export function CounterButton({
     <Button
       variant="outline"
       size="icon"
+      className="size-11"
       aria-label={ariaLabel}
       onClick={onPress}
       disabled={disabled}

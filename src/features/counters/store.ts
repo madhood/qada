@@ -2,18 +2,26 @@ import { useSyncExternalStore } from 'react'
 
 import { clampNonNegative } from '#/features/counters/calc'
 import type { PrayerKey, ProgressState } from '#/features/counters/types'
+import {
+  loadRecord,
+  subscribeExternal,
+  updateRecord,
+} from '#/lib/storage/persistence'
+import { markUnavailable } from '#/lib/storage/status'
 
-const INITIAL_STATE: ProgressState = {
-  prayers: { fajr: 40, dhuhr: 41, asr: 40, maghrib: 42, isha: 40 },
-  fasts: 30,
+function readState(): ProgressState {
+  const r = loadRecord()
+  return { prayers: r.prayers, fasts: r.fasts }
 }
 
-let state: ProgressState = INITIAL_STATE
+let state: ProgressState = readState()
 const listeners = new Set<() => void>()
 
 function setState(next: ProgressState): void {
   state = next
   for (const listener of listeners) listener()
+  const res = updateRecord({ prayers: state.prayers, fasts: state.fasts })
+  if (!res.ok) markUnavailable()
 }
 
 /** Read the current state (do not mutate the returned object). */
@@ -56,3 +64,7 @@ export function decrementFast(): void {
 export function useCounters(): ProgressState {
   return useSyncExternalStore(subscribe, getState, getState)
 }
+
+subscribeExternal(() => {
+  setState(readState())
+})

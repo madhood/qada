@@ -34,6 +34,14 @@ describe('formatYmdParts', () => {
         { unit: 'day', value: 10 },
       ],
     ],
+    [
+      40000,
+      [
+        { unit: 'year', value: 111 },
+        { unit: 'month', value: 1 },
+        { unit: 'day', value: 10 },
+      ],
+    ],
   ])('formats %i days', (days, expected) => {
     expect(formatYmdParts(days)).toEqual(expected)
   })
@@ -84,6 +92,18 @@ describe('surplus', () => {
     expect(surplus(state, 'asr')).toBe(1)
     expect(surplus(state, 'maghrib')).toBe(3)
     expect(surplus(state, 'isha')).toBe(1)
+  })
+
+  it('returns 0 for every prayer when all counts are 0', () => {
+    const state: ProgressState = {
+      prayers: { fajr: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0 },
+      fasts: 0,
+    }
+    expect(surplus(state, 'fajr')).toBe(0)
+    expect(surplus(state, 'dhuhr')).toBe(0)
+    expect(surplus(state, 'asr')).toBe(0)
+    expect(surplus(state, 'maghrib')).toBe(0)
+    expect(surplus(state, 'isha')).toBe(0)
   })
 })
 
